@@ -15,7 +15,7 @@ def analyseGame(game):
     for move in game.mainline_moves():
         board.push(move)
         stockFishResults = stockfishAPI(board.fen(), 12)
-        # board, eval, continuation, complexity, legal moves
+        # board, eval, continuation, legal moves
         data.append([board, stockFishResults[1], stockFishResults[2], getLegalMoves(board)])
     
     return data
@@ -35,5 +35,4 @@ def stockfishAPI(fen, depth):
         print("There was an error with stockfish")
         return
 
-    print(data)
     return [data['bestmove'], data['evaluation'], data['continuation']]
