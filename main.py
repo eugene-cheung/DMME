@@ -9,8 +9,9 @@ Bootstrap(app)
 def home():
     return render_template("index.html")
 
-@app.route("/analysis")
+@app.route("/analysis", methods=["POST"])
 def analysis():
+    pgn_data = request.form['pgn']
     return render_template("analysis.html")
 
 @app.route("/about")
