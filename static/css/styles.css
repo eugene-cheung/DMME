@@ -2,7 +2,8 @@ body {
   font-family: Arial, sans-serif;
   margin: 0;
   padding: 0;
-  background-color: #f4f4f4;
+  background-color: lightgreen;
+  
 }
 
 nav {
@@ -57,4 +58,27 @@ nav {
   .nav-list li {
     margin-bottom: 10px;
   }
+}
+
+.header-container {
+  background-color: navy;
+  text-align: center;
+  margin: 15rem 15rem 15rem 15rem;
+  height: 20rem;
+}
+
+.header-container h1 {
+  font-weight: bold;
+  color: white;
+  padding-top: 5rem;
+}
+
+.main-content {
+  text-align: center;
+  margin-top: 2rem;
+}
+
+.main-content form {
+  display: inline-block;
+  text-align: left;
 }
