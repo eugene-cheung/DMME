@@ -10,7 +10,7 @@
 <!-- main content-->
  <div class="main-content">
     <h1>Paste in your PGN</h1>
-    <form>
+    <form action="{{ url_for('analysis')}}" method="post">
       <textarea name="pgn" rows="10" cols="50" placeholder="Paste your PGN here"></textarea>
       <br>
       <button type="submit" class="analyze">Analyze</button>
