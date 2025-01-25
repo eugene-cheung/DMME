@@ -1,74 +1,57 @@
-# ! pip install --upgrade --quiet pymilvus langchain langchain-community langchainhub langchain-openai faiss-cpu unstructured
-# ! docker-compose up -d
+# phoenix_openai_rag_agent.py
 
+# ! pip install --upgrade --quiet pymilvus langchain langchain-community langchainhub langchain-openai faiss-cpu unstructured
 from langchain_community.document_loaders import DirectoryLoader
-from langchain_text_splitters import RecursiveCharacterTextSplitter
-from dotenv import load_dotenv
-import os
+from langchain.text_splitter import RecursiveCharacterTextSplitter
+from langchain.vectorstores import FAISS
+from langchain.embeddings.openai import OpenAIEmbeddings
+from langchain.agents import Tool
+from langchain.llms import OpenAI
+from langchain.agents import initialize_agent
+
 import phoenix as px
 from phoenix.trace.langchain import LangChainInstrumentor
-from langchain_community.vectorstores import FAISS
-from langchain_openai import OpenAIEmbeddings
-from langchain_core.callbacks import StdOutCallbackHandler
-from langchain.callbacks.arize_callback import ArizeCallbackHandler
-from langchain.callbacks.manager import CallbackManager
-from langchain.tools.retriever import create_retriever_tool
-from langchain import hub
-from langchain_openai import ChatOpenAI
-from langchain.agents import AgentExecutor, create_openai_tools_agent
+import os
+from dotenv import load_dotenv
 
 load_dotenv()
+OPENAI_API_KEY = os.getenv("OPENAI_API_KEY")
+if not OPENAI_API_KEY:
+    raise ValueError("OPENAI_API_KEY not found. Set it as an environment variable or in a .env file.")
 
-OPENAI_API_KEY = os.environ["OPENAI_API_KEY"]
-
-
+# Launch Phoenix session for observability
 session = px.launch_app()
-
-
 LangChainInstrumentor().instrument()
 
+# Load and split pgn games for analysis
+pgn_folder_path = "./Annotated Games"
+loader = DirectoryLoader(pgn_folder_path, glob="*.pgn")
+docs = loader.load()
 text_splitter = RecursiveCharacterTextSplitter(chunk_size=1024, chunk_overlap=128)
-loader = DirectoryLoader("../city_data")
-docs = loader.load_and_split(text_splitter=text_splitter)
+split_docs = text_splitter.split_documents(docs)
+print(f"Loaded and split {len(split_docs)} documents.")
 
-
-
+# Embeds split documents into FAISS for retrieval
 embeddings = OpenAIEmbeddings()
-db = FAISS.from_documents(
-    docs, 
-    embeddings)
-
+db = FAISS.from_documents(split_docs, embeddings)
 retriever = db.as_retriever()
+print("Vector store created and retriever initialized.")
 
-
-
-
-
-tool = create_retriever_tool(
-    retriever,
-    "search_cities",
-    "Searches and returns excerpts from Wikipedia entries of many cities.",
-)
-tools = [tool]
-
-
-
-prompt = hub.pull("hwchase17/openai-tools-agent")
-prompt.messages
-
-
-
-llm = ChatOpenAI(temperature=0, verbose=True)
-
-
-
-agent = create_openai_tools_agent(llm, tools, prompt)
-agent_executor = AgentExecutor(agent=agent, tools=tools)
-
-result = agent_executor.invoke(
-    {
-        "input": "How big is Boston?"
-    }
+# Given chess analysis in chess.py, integrate with LangChain to form agent.
+llm = OpenAI(temperature=0, verbose=True)
+chess_tool = Tool(
+    name="Chess Analysis Tool",
+    func=lambda query: ChessEngineTool(engine_path="path/to/stockfish").analyze_position(query), # replace w/ api call
+    description="Analyzes a chess position given its FEN."
 )
 
-result["output"]
+agent = initialize_agent(
+    tools=[chess_tool],
+    llm=llm,
+    agent="zero-shot-react-description",
+    verbose=True
+)
+
+# example query
+query = "Analyze the position after the 5th move in this game: 1. e4 e5 2. Nf3 Nc6 3. Bb5 a6 4. Ba4 Nf6"
+result = agent.run(query)
