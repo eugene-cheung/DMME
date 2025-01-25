@@ -2,7 +2,8 @@ body {
   font-family: Arial, sans-serif;
   margin: 0;
   padding: 0;
-  background-color: #f4f4f4;
+  background-color: lightgreen;
+  
 }
 
 nav {
@@ -71,4 +72,33 @@ footer p {
   .nav-list li {
     margin-bottom: 10px;
   }
+}
+
+.header-container {
+  background-color: navy;
+  text-align: center;
+  margin: 5rem 15rem 0rem 15rem;
+  height: 20rem;
+}
+
+.header-container h1 {
+  font-weight: bold;
+  color: white;
+  padding-top: 5rem;
+}
+
+.header-container p {
+  color: white;
+  padding-left: 5rem;
+  padding-right: 5rem;
+}
+
+.main-content {
+  text-align: center;
+  margin-top: 2rem;
+}
+
+.main-content form {
+  display: inline-block;
+  text-align: center;
 }
