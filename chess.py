@@ -1,10 +1,9 @@
-# File for functions for chess python library. 
+# File for functions for chess python library.
 
 import chess
 import chess.pgn
 
 board = chess.Board()
-
 
 # Reads a game from a file opened in text.
 pgn = open("data/pgn/kasparov-deep-blue-1997.pgn")
