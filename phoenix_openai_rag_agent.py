@@ -1,5 +1,4 @@
-# ! pip install --upgrade --quiet pymilvus langchain langchain-community langchainhub langchain-openai faiss-cpu unstructured
-# ! docker-compose up -d
+# phoenix_openai_rag_agent.py
 
 from langchain_community.document_loaders import DirectoryLoader
 from langchain_text_splitters import RecursiveCharacterTextSplitter
@@ -9,66 +8,40 @@ import phoenix as px
 from phoenix.trace.langchain import LangChainInstrumentor
 from langchain_community.vectorstores import FAISS
 from langchain_openai import OpenAIEmbeddings
-from langchain_core.callbacks import StdOutCallbackHandler
-from langchain.callbacks.arize_callback import ArizeCallbackHandler
-from langchain.callbacks.manager import CallbackManager
 from langchain.tools.retriever import create_retriever_tool
-from langchain import hub
 from langchain_openai import ChatOpenAI
 from langchain.agents import AgentExecutor, create_openai_tools_agent
 
+# Load environment variables
 load_dotenv()
+OPENAI_API_KEY = os.environ.get("OPENAI_API_KEY")
 
-OPENAI_API_KEY = os.environ["OPENAI_API_KEY"]
-
-
+# Launch Phoenix session
 session = px.launch_app()
-
-
 LangChainInstrumentor().instrument()
 
+# Load and split documents
 text_splitter = RecursiveCharacterTextSplitter(chunk_size=1024, chunk_overlap=128)
 loader = DirectoryLoader("../city_data")
 docs = loader.load_and_split(text_splitter=text_splitter)
 
-
-
-embeddings = OpenAIEmbeddings()
-db = FAISS.from_documents(
-    docs, 
-    embeddings)
-
+# Create FAISS vector store
+db = FAISS.from_documents(docs, OpenAIEmbeddings())
 retriever = db.as_retriever()
 
-
-
-
-
+# Create retriever tool
 tool = create_retriever_tool(
     retriever,
     "search_cities",
-    "Searches and returns excerpts from Wikipedia entries of many cities.",
+    "Searches and returns excerpts from Wikipedia entries of many cities."
 )
-tools = [tool]
 
-
-
-prompt = hub.pull("hwchase17/openai-tools-agent")
-prompt.messages
-
-
-
+# Set up LLM and agent
 llm = ChatOpenAI(temperature=0, verbose=True)
+prompt = hub.pull("hwchase17/openai-tools-agent")
+agent = create_openai_tools_agent(llm, [tool], prompt)
+agent_executor = AgentExecutor(agent=agent, tools=[tool])
 
-
-
-agent = create_openai_tools_agent(llm, tools, prompt)
-agent_executor = AgentExecutor(agent=agent, tools=tools)
-
-result = agent_executor.invoke(
-    {
-        "input": "How big is Boston?"
-    }
-)
-
-result["output"]
+# Example query
+result = agent_executor.invoke({"input": "How big is Boston?"})
+print(result["output"])
