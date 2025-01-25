@@ -18,7 +18,7 @@ def analyseGame(game):
         board.push(move)
         stockFishResults = stockfishFile(board.fen(), 5)
         # board, eval, continuation, legal moves
-        data.append([board.fen(), stockFishResults[0], stockFishResults[1], getLegalMoves(board)])
+        data.append([board.fen(), stockFishResults[0], stockFishResults[1]])
     
     return data
 
