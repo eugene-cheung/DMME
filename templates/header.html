@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1, shrink-to-fit=no"
+    />
+    <meta name="description" content="Chess Analysis App" />
+    <meta name="author" content="Daniel Schubin, Matthew Polasub, Matthew Lua, Eugene Cheung" />
+    <title>Chess Analysis</title>
+    {% block styles %}
+    <!-- Load Bootstrap-Flask CSS here -->
+    {{ bootstrap.load_css() }}
+
+    <link
+      href="{{ url_for('static', filename='css/styles.css') }}"
+      rel="stylesheet"
+    />
+    {% endblock %}
+  </head>
+  <body>
+    <!--navbar stuff-->
+    <nav class="navbar">
+      <div class="container">
+
+      </div>
+    </nav>
