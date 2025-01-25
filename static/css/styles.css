@@ -63,7 +63,7 @@ nav {
 .header-container {
   background-color: navy;
   text-align: center;
-  margin: 15rem 15rem 15rem 15rem;
+  margin: 5rem 15rem 0rem 15rem;
   height: 20rem;
 }
 
@@ -73,6 +73,12 @@ nav {
   padding-top: 5rem;
 }
 
+.header-container p {
+  color: white;
+  padding-left: 5rem;
+  padding-right: 5rem;
+}
+
 .main-content {
   text-align: center;
   margin-top: 2rem;
@@ -80,5 +86,5 @@ nav {
 
 .main-content form {
   display: inline-block;
-  text-align: left;
+  text-align: center;
 }
