@@ -14,11 +14,10 @@ def home():
 @app.route("/analysis", methods=["POST"])
 def analysis():
     pgn_data = request.form['pgn']
-    return render_template("analysis.html")
-    pgn = readPGN("lichess_pgn_2024.09.05_TigritoForever_vs_shubindani.1Ex3Xcl7 (2).pgn")
+    pgn = readPGN(pgn_data)
     data = analyseGame(pgn)
-    print(data)
     return render_template("analysis.html", data = data)
+
 
 @app.route("/about")
 def about():
