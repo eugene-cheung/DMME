@@ -2,7 +2,7 @@ body {
   font-family: Arial, sans-serif;
   margin: 0;
   padding: 0;
-  background-color: lightgreen;
+  background-color: #4B2E83;
   
 }
 
@@ -75,16 +75,13 @@ footer p {
 }
 
 .header-container {
-  background-color: navy;
   text-align: center;
-  margin: 5rem 15rem 0rem 15rem;
-  height: 20rem;
 }
 
 .header-container h1 {
   font-weight: bold;
   color: white;
-  padding-top: 5rem;
+  padding-top: 2rem;
 }
 
 .header-container p {
@@ -101,4 +98,66 @@ footer p {
 .main-content form {
   display: inline-block;
   text-align: center;
+}
+
+.about-header {
+   background-color: #4B2E83;
+   color: white;
+  text-align: center;
+  margin: 5rem 15rem 0rem 15rem;
+  height: 8rem;
+}
+
+/* Image Container Stuff (HOME PAGE) */
+.home-md-2 {
+    background-color: white;
+    padding: 25 px;
+    border-radius: 12px;
+    box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
+    margin: 15px;
+    text-align: center;
+    transition: transform 0.2s ease-in-out;
+    max-width: 400px;
+}
+
+.home-md-2:hover {
+    transform: scale(1.05);
+    box-shadow: 0px 6px 12px rgba(0, 0, 0, 0.15);
+}
+
+.home-md-2 img {
+    max-width: 100%;
+    height: auto;
+    margin-bottom: 15px;
+}
+
+/* Image Container Stuff (ABOUT US PAGE) */
+.about-card {
+    background-color: gold;
+    padding: 25px;
+    border-radius: 12px;
+    box-shadow: 0px 4px 8 px rgba(0, 0, 0, 0.1);
+    text-align: center;
+    transition: transform 0.2s ease-in-out;
+    max-width: 280px;
+    flex-grow: 1;
+    border-top: 5px solid #4B2E83;
+    margin-bottom: 20px;
+    justify-content: center;
+    margin-right: 50px;
+}
+
+.about-card img {
+    width: 100px;
+    height: 100px;
+    border-radius: 50%;
+    margin-bottom: 10px;
+    border: 3px solid white;
+}
+
+.meet-title {
+    font-size: 48px;
+    color: white;
+    font-weight: bold;
+    margin-bottom: 10px;
 }
