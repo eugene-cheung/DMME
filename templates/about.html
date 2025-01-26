@@ -1,8 +1,53 @@
 {% include "header.html" %}
 
 <!-- main content-->
-<div class="container">
+<header>
+  <div class="about-header">
+    <h1>Go Huskies!</h1>
+    <p>We're a bunch of UW students passionate about Computer Science and Informatics.</p>
+    <img src = "https://th.bing.com/th/id/R.bc445e7ba2d1119f4eb6f5c2c554d8c4?rik=77VV6p77nSts%2fg&pid=ImgRaw&r=0"
+         alt = "UW Logo" width = "100">
+  </div>
+</header>
+<!-- main content-->
+<div class="container mt-5">
+  <div class="row justify-content-center">
+      <!-- Groupmate 1 -->
+      <div class="container text-center mt-5">
+        <h1 class="meet-title">MEET THE TEAM</h1>
+      </div>
 
-</div>
+      <div class="col-md-2 about-card">
+        <img src="" alt="Daniel">
+        <h3>Daniel S.</h3>
+        <p><strong>Likes:</strong> Machine Learning, Chess, Hiking</p>
+        <p><strong>Dislikes:</strong> Slow Internet, Blundering Queens</p>
+      </div>
+
+      <!-- Groupmate 2 -->
+      <div class="col-md-2 about-card">
+        <img src="{{ url_for('static', filename='images/matthew-p.jpg') }}" alt="Matthew P">
+        <h3>Matthew P.</h3>
+        <p><strong>Likes:</strong> Web Development, Puzzles, Espresso</p>
+        <p><strong>Dislikes:</strong> Debugging at 3 AM, Losing to Stockfish</p>
+      </div>
+
+      <!-- Groupmate 3 -->
+      <div class="col-md-2 about-card">
+        <img src="{{ url_for('static', filename='images/matthew-l.jpg') }}" alt="Matthew L">
+        <h3>Matthew L.</h3>
+        <p><strong>Likes:</strong> AI Research, Python, Running</p>
+        <p><strong>Dislikes:</strong> Long Compiles, Keyboard Lag</p>
+      </div>
+
+      <!-- Groupmate 4 -->
+      <div class="col-md-2 about-card">
+        <img src="{{ url_for('static', filename='images/eugene.jpg') }}" alt="Eugene">
+        <h3>Eugene C.</h3>
+        <p><strong>Likes:</strong> Cybersecurity, Databases, Rock Climbing</p>
+        <p><strong>Dislikes:</strong> Memory Leaks, Unsolved CTFs</p>
+      </div>
+    </div>
+  </div>
 
 {% include "footer.html" %}

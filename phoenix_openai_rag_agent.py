@@ -3,7 +3,7 @@ from dotenv import load_dotenv
 from openai import OpenAI
 
 client = OpenAI(
-  api_key="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"
+  api_key="OPEN_AI_API_KEY"
 )
 
 # completion = client.chat.completions.create(

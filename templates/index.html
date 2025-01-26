@@ -3,11 +3,42 @@
 <!--page header-->
 <header>
   <div class="header-container">
-    <h1>Welcome to Chessbot!</h1>
-    <p>This is an AI bot designed to analyze any of your completed games. Simply paste in a PGN into the textbox below, click analyze, and we will exactly why a move is or isn't good. We will even evaluate moves you were considering! Simply ask us "Why isn't this move good" or "How did this move work", or even "How can I prevent checkmate"! All that and more.</p>
+    <h1>Chessbot - AI Chess Analysis</h1>
+    <p>An AI bot designed to analyze any of your completed games. </p>
   </div>
 </header>
 <!-- main content-->
+<body>
+    <div class="container mt-5">
+        <div class="row justify-content-center">
+            <!-- Feature 1 -->
+            <div class="col-md-4 home-md-2">
+                <img src="https://www.clipartkey.com/mpngs/m/72-728835_chess.png"
+                     alt = "Chess PGN" width = "200">
+                <h3>Game Analysis</h3>
+                <p>Upload your PGN file and go over your game.</p>
+            </div>
+
+            <!-- Feature 2 -->
+            <div class="col-md-4 home-md-2">
+                <img src="https://cdn2.iconfinder.com/data/icons/artificial-intelligence-77/100/tactical-ai-1-artificial-intelligence-ai-logic-analysis-machine-learning-robot-arm-game-chess-512.png"
+                     alt = "Chess PGN" width = "200">
+                <h3>AI Move Suggestions</h3>
+                <p>Receive AI-recommended moves and learn unique strategic ideas to improve your game.</p>
+            </div>
+
+            <!-- Feature 3 (IN WORKS) -->
+            <div class="col-md-4 home-md-2">
+                <img src="https://images.chesscomfiles.com/uploads/v1/images_users/tiny_mce/PedroPinhata/phpdFgJU0.png"
+                     alt = "Chess PGN" width = "200">
+                <h3>Opening Preparation</h3>
+                <p>Study advanced variations from a database to prepare for tough opponents.</p>
+            </div>
+
+        </div>
+    </div>
+</body>
+
  <div class="main-content">
     <h1>Paste in your PGN</h1>
     <form action="{{ url_for('analysis')}}" method="post">
