@@ -29,7 +29,6 @@ def analyze_game(pgn, index):
 
 # load_dotenv()
 #
-# # OPENAI_API_KEY = environ["OPENAI_API_KEY"]
 #
 # from llama_index.core import (
 #     SimpleDirectoryReader,
