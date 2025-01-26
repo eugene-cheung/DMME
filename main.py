@@ -2,6 +2,7 @@ from flask import Flask, render_template, request, redirect, url_for, session
 from flask_bootstrap import Bootstrap5
 import chess
 import chess.svg
+from phoenix_openai_rag_agent import analyze_game
 
 from analyse_game import readPGN, analyseGame
 
@@ -22,19 +23,24 @@ def analysis():
 
     session['game_data'] = data
     session['move_index'] = 0  # Initialize the move index at the first move
+    session['match_pgn'] = pgn_data
 
     board = chess.Board(data[0][0])
     svg_board = chess.svg.board(
         board,
         size=350,
     )
-    return render_template("analysis.html", svg_board=svg_board)
+    response = analyze_game(pgn_data, 0)
+
+    return render_template("analysis.html", svg_board=svg_board, response=response)
 
 @app.route("/move", methods=["POST"])
 def move():
     move_direction = request.form['direction']  # 'forward' or 'back'
     game_data = session.get('game_data')
     move_index = session.get('move_index', 0)
+    match_pgn = session.get('match_pgn')
+
 
     if move_direction == 'forward' and move_index < len(game_data) - 1:
         move_index += 1
@@ -50,7 +56,9 @@ def move():
         board,
         size=350,
     )
-    return render_template("analysis.html", svg_board=svg_board)
+    response = analyze_game(match_pgn, move_index)
+
+    return render_template("analysis.html", svg_board=svg_board, response=response)
 
 @app.route("/about")
 def about():

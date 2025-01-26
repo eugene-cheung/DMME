@@ -1,15 +1,25 @@
 {% include "header.html" %}
 
 <!-- main content-->
-<div class="container">
-  {{ svg_board|safe }}
-</div>
+<div class="chess-container">
+        <!-- Left Section with Chessboard and Form -->
+        <div class="left-section">
+            <!-- Chessboard -->
+            <div class="chessboard">
+                {{ svg_board|safe }}
+            </div>
+            <!-- Form -->
+            <form method="POST" action="/move">
+                <button type="submit" name="direction" value="back" class="btn btn-primary">Back</button>
+                <button type="submit" name="direction" value="forward" class="btn btn-primary">Forward</button>
+            </form>
+        </div>
 
-<div class="container text-center">
-  <form method="POST" action="/move">
-    <button type="submit" name="direction" value="back" class="btn btn-primary">Back</button>
-    <button type="submit" name="direction" value="forward" class="btn btn-primary">Forward</button>
-  </form>
-</div>
+        <!-- Right Section: Text Output Box -->
+        <div class="text-output">
+            <h3>Game Analysis</h3>
+            <p>{{ response }}</p>
+        </div>
+    </div>
 
 {% include "footer.html" %}

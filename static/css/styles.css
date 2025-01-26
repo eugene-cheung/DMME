@@ -102,3 +102,40 @@ footer p {
   display: inline-block;
   text-align: center;
 }
+
+.chess-container {
+    display: flex;
+    flex-direction: row; /* Arrange items in a row */
+    gap: 20px; /* Add space between items */
+    align-items: flex-start; /* Align items at the top */
+}
+
+.left-section {
+    display: flex;
+    flex-direction: column; /* Stack board and form vertically */
+    gap: 10px; /* Space between the chessboard and form */
+}
+
+.chessboard {
+    background-color: #ddd;
+    width: 400px;
+    height: 400px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.text-output {
+    width: 300px;
+    height: 400px;
+    background-color: #ffffff;
+    border: 1px solid #ccc;
+    border-radius: 8px;
+    padding: 15px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    overflow-y: auto;
+}
+
+.btn {
+    margin-right: 5px; /* Add spacing between buttons */
+}

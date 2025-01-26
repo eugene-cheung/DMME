@@ -3,5 +3,9 @@ Flask_CKEditor==0.4.6
 Werkzeug==3.0.0
 Flask==2.3.2
 python-chess
-requests
-stockfish
+requests~=2.32.3
+stockfish~=3.28.0
+chess~=1.11.1
+phoenix~=0.9.1
+python-dotenv~=1.0.1
+openai~=1.60.1
