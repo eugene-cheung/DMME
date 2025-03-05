@@ -2,10 +2,12 @@ from os import environ
 from dotenv import load_dotenv
 from openai import OpenAI
 
-client = OpenAI(
-  api_key="OPEN_AI_API_KEY"
-)
+load_dotenv()
 
+client = OpenAI(
+    api_key=environ.get("PERPLEXITY_API_KEY"),
+    base_url="https://api.perplexity.ai"
+)
 # completion = client.chat.completions.create(
 #   model="gpt-4o-mini",
 #   store=True,
@@ -16,17 +18,15 @@ client = OpenAI(
 #
 # print(completion.choices[0].message)
 
-
 def analyze_game(pgn, index):
-  completion = client.chat.completions.create(
-    model="gpt-4o-mini",
-    store=True,
+  response = client.chat.completions.create(
+    model="sonar-pro",
     messages=[
       {"role": "user",
        "content": f"Analyze the position after the {index+1}th move in this game: {pgn}."}
     ]
   )
-  return completion.choices[0].message
+  return response.choices[0].message
 
 # load_dotenv()
 #
