@@ -1,7 +1,7 @@
 from flask import Flask, render_template, request, redirect, url_for, session
 from flask_bootstrap import Bootstrap
 import chess
-import chess.svg
+import chess.svgo
 from phoenix_openai_rag_agent import analyze_game
 
 from analyse_game import readPGN, analyseGame

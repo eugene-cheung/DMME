@@ -30,8 +30,6 @@ def analyze_game(pgn, index):
 
 # load_dotenv()
 #
-# # OPENAI_API_KEY = environ["OPENAI_API_KEY"]
-# OPENAI_API_KEY = "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"
 #
 # from llama_index.core import (
 #     SimpleDirectoryReader,
