@@ -1,5 +1,5 @@
 from flask import Flask, render_template, request, redirect, url_for, session
-from flask_bootstrap import Bootstrap5
+from flask_bootstrap import Bootstrap
 import chess
 import chess.svg
 from phoenix_openai_rag_agent import analyze_game
@@ -8,7 +8,7 @@ from analyse_game import readPGN, analyseGame
 
 app = Flask(__name__)
 app.secret_key = "your_secret_key"
-Bootstrap5(app)
+Bootstrap(app)
 
 
 @app.route("/")
